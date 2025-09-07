@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Extension methods over inline arrays in C#"
+title:  "C#: Extension methods over inline arrays"
 date:   2025-09-07 20:02:47 +0200
 ---
 ## Where we came from: Fixed-size buffers
@@ -12,11 +12,11 @@ feature introduced to deal with this exact class of problem.
 One can declare a struct as follows and get expected behavior.
 {% highlight csharp %}
 {% raw %}
-\[StructLayout(LayoutKind.Explicit, Pack = 4, Size = 0x2150)\]
+[StructLayout(LayoutKind.Explicit, Pack = 4, Size = 0x2150)]
 public unsafe struct Btl {
-    \[FieldOffset(0x198A)\] public fixed byte field_name\[8\];
-    \[FieldOffset(0x1FC5)\] public fixed byte frontline\[3\];
-    \[FieldOffset(0x1FD3)\] public fixed byte backline\[4\];
+    [FieldOffset(0x198A)] public fixed byte field_name[8];
+    [FieldOffset(0x1FC5)] public fixed byte frontline[3];
+    [FieldOffset(0x1FD3)] public fixed byte backline[4];
 }
 {% endraw %}
 {% endhighlight %}
@@ -31,7 +31,7 @@ Consider the following sample from the .NET examples:
 {% raw %}
 internal unsafe struct Buffer
 {
-    public fixed char fixedBuffer\[128\];
+    public fixed char fixedBuffer[128];
 }
 
 internal unsafe class Example
@@ -46,17 +46,17 @@ private static void AccessEmbeddedArray()
     unsafe
     {
         // Pin the buffer to a fixed location in memory.
-        fixed (char\* charPtr = example.buffer.fixedBuffer)
+        fixed (char* charPtr = example.buffer.fixedBuffer)
         {
-            \*charPtr = 'A';
+            *charPtr = 'A';
         }
         // Access safely through the index:
-        char c = example.buffer.fixedBuffer\[0\];
+        char c = example.buffer.fixedBuffer[0];
         Console.WriteLine(c);
 
         // Modify through the index:
-        example.buffer.fixedBuffer\[0\] = 'B';
-        Console.WriteLine(example.buffer.fixedBuffer\[0\]);
+        example.buffer.fixedBuffer[0] = 'B';
+        Console.WriteLine(example.buffer.fixedBuffer[0]);
     }
 }
 {% endraw %}
@@ -64,7 +64,7 @@ private static void AccessEmbeddedArray()
 
 This adds up to a fairly verbose way to model and consume such structures.
 
-## Where we're headed; `[InlineArray]`
+## Where we're headed; inline arrays
 As an improvement to this, .NET 8 and C# 12 introduced the
 [`[InlineArray]` attribute](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-12.0/inline-arrays),
 which offers a number of compelling benefits:
@@ -76,12 +76,12 @@ which offers a number of compelling benefits:
 One can model the following:
 {% highlight csharp %}
 {% raw %}
-\[InlineArray(20)\]
+[InlineArray(20)]
 public struct ByteArray20 {
     private byte _b;
 }
 
-\[InlineArray(40)\]
+[InlineArray(40)]
 public struct ByteArray40 {
     private byte _b;
 }
@@ -102,7 +102,7 @@ and trivially `foreach` over the contents of these arrays. Success!
 
 But we're not out of the woods quite yet.
 
-## Operating over `[InlineArray]`s generically
+## Operating over inline arrays generically
 The size of an inline array is a compile-time constant. For each
 type T and size S, one needs to define an `[InlineArray(S)]` of `T`.
 
@@ -195,7 +195,7 @@ We arrive at the final syntax:
 [InlineArray(40)]
 public struct ByteArray40 {
     private byte _b;
-    \[UnscopedRef\] public Span<byte> as_span() => this;
+    [UnscopedRef] public Span<byte> as_span() => this;
 }
 {% endraw %}
 {% endhighlight %}
