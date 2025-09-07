@@ -226,4 +226,6 @@ public struct CHRDATA {
 {% endraw %}
 {% endhighlight %}
 
-Which brings a day of debugging to a happy ending.
+which, in the end, allows us to take all of the benefits
+of inline array types while still allowing us to express
+generic transformations on them regardless of their size.
