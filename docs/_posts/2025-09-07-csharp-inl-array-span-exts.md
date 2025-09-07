@@ -7,7 +7,7 @@ date:   2025-09-07 20:02:47 +0200
 In .NET native interop cases, one often has a need to model
 fixed-size arrays. Those familiar with the subject matter will know
 of the [fixed size buffers](https://github.com/dotnet/csharpstandard/blob/draft-v8/standard/unsafe-code.md#238-fixed-size-buffers) 
-feature introduced to deal with this exact class of problem.
+feature introduced for this exact reason.
 
 One can declare a struct as follows and get expected behavior.
 {% highlight csharp %}
@@ -118,12 +118,13 @@ extension methods over `Span<T>` or a concrete specialization like `Span<byte>`.
 So why not take advantage of that? Let's try the following.
 {% highlight csharp %}
 {% raw %}
-[InlineArray(40)]
-public struct ByteArray40 {
-    private byte _b;
-}
 [InlineArray(20)]
 public struct ByteArray20 {
+    private byte _b;
+}
+
+[InlineArray(40)]
+public struct ByteArray40 {
     private byte _b;
 }
 
@@ -160,7 +161,7 @@ public struct CHRDATA {
     public ByteArray40 chr_name_extended;
 
     public void test() {
-        Span<byte> chr_name_span = chr_name;
+        Span<byte> chr_name_span = chr_name; // Valid assignment.
     }
 }
 {% endraw %}
@@ -189,7 +190,7 @@ is the method itself. It cannot escape `test()`, but it can be used as a method 
 What we need is a way to pinky-promise to the compiler that we will do just that;
 only use the obtained `Span<byte>` as a method local in `test()`, which is safe.
 
-This is done using the [`\[UnscopedRef\]` attribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.unscopedrefattribute?view=net-9.0).
+This is done using the [`[UnscopedRef]` attribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.unscopedrefattribute?view=net-9.0).
 
 We arrive at the final syntax:
 {% highlight csharp %}
