@@ -4,7 +4,7 @@
 
 layout: base
 ---
-![What keeps us going.](/assets/images/logo_bl_transparent.png){:style="display:block; margin-left:auto; margin-right:auto; max-height:60%"}
+![What keeps us going.](/assets/images/logo_bl_transparent.png){:style="display:block; margin-left:auto; margin-right:auto;"}
 
 {: .align-center}
 [About](/about.markdown)
