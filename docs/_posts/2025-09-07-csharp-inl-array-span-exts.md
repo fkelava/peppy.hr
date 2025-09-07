@@ -87,8 +87,8 @@ public struct ByteArray40 {
 }
 
 public struct CHRDATA {
-    public ByteArray20 chr_name;
-    public ByteArray20 chr_name_extended;
+    public ByteArray20 name;
+    public ByteArray40 name_ext;
     
     public void TestMethod() {
         foreach (byte b in chr_name) 
@@ -108,8 +108,8 @@ a unique struct that is `[InlineArray(S)]` of `T` for each unique size `S` and t
 
 However, you may very well wish to operate over any inline array of `T`
 generically. How are we to do that? `[InlineArray]` is a special
-attribute, not an interface. We cannot use that as a generic constraint
-nor can we define an extension method over it.
+attribute, not an interface. We cannot use that as a [generic constraint](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters)
+nor can we define an [extension method](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) over it.
 
 A few paragraphs above, we mentioned that inline arrays of `T` are 
 implicitly convertible to `Span<T>`. And it is legal to define
@@ -135,13 +135,14 @@ public static class Extensions {
 }
 
 public struct CHRDATA {
-    public ByteArray20 chr_name;
-    public ByteArray40 chr_name_extended;
+    public ByteArray20 name;
+    public ByteArray40 name_ext;
 
     public void test() {
-        // CS1929: best extension method overload 'decode_name' requires receiver of type Span<byte>
-        string str_chr_name          = chr_name.decode_name();
-        string str_chr_name_extended = chr_name_extended.decode_name();
+        // CS1929: best extension method overload 'decode_name' 
+        // requires receiver of type Span<byte>
+        string str_name     = name.decode_name();
+        string str_name_ext = name_ext.decode_name();
     }
 }
 {% endraw %}
@@ -157,11 +158,12 @@ If we were in a method, we could obtain the `Span<T>` as follows:
 {% highlight csharp %}
 {% raw %}
 public struct CHRDATA {
-    public ByteArray20 chr_name;
-    public ByteArray40 chr_name_extended;
+    public ByteArray20 name;
+    public ByteArray40 name_ext;
 
     public void test() {
-        Span<byte> chr_name_span = chr_name; // Valid assignment.
+        // Valid assignment.
+        Span<byte> name_span = name;
     }
 }
 {% endraw %}
@@ -174,7 +176,8 @@ Taking the obvious route, we augment the inline array definition with the follow
 [InlineArray(40)]
 public struct ByteArray40 {
     private byte _b;
-    // CS8170: Struct members cannot return 'this' or other instance members by reference.
+    // CS8170: Struct members cannot return 'this' 
+    // or other instance members by reference.
     public Span<byte> as_span() => this;
 }
 {% endraw %}
@@ -213,11 +216,11 @@ public static class Extensions {
 }
 
 public struct CHRDATA {
-    public ByteArray20 chr_name;
-    public ByteArray40 chr_name_extended;
+    public ByteArray20 name;
+    public ByteArray40 name_ext;
 
     public void test() {
-        string chr_name_extended_str = chr_name_extended.as_span().decode_name(); 
+        string str_name_ext = name_ext.as_span().decode_name(); 
     }
 }
 {% endraw %}
