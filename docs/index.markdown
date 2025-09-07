@@ -7,4 +7,8 @@ layout: home
 ![What keeps us going.](/assets/images/logo_bl_transparent.png)
 
 Welcome to the website of **peppynet**, a one-man company specializing
-in .NET applications across desktop, mobile and embedded use cases.
+in desktop, mobile and even embedded .NET development,
+with a special focus on automotive applications.
+
+Grab a copy of the [resume](/assets/CV_FranKelava_2025.pdf), read more
+[about us](/about.markdown), or browse posts from our blog below.
