@@ -4,15 +4,21 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+I'm Fran, and the unicorn plushie you see all over the place is Peppy. Together, we make **peppynet**.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+![Working together.](/assets/work2_bl_transparent.gif)
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+Our field of work is software development, primarily in .NET/C# and for the automotive sector, and systems administration.
 
+Our _specialty_ is solving unorthodox problems. The path less traveled has brought us a few interesting challenges:
+- real-time extraction, post-processing and visualization of sensor data from a race car
+- setting up and administering a hybrid Active Directory setup for a team of 50+ engineers
+- injecting a plugin framework into a foreign process with no source code access 
+- creating a mobile application to assist with vehicle fleet testing and homologation
 
-[jekyll-organization]: https://github.com/jekyll
+and we're looking forward to many, many more in the years to come.
+
+Whether you're looking for any of those or simply a solid hand to help you fulfill your business's software needs,
+you can reach us at the e-mail in the page's footer.
+
+![A nice vista to wave you goodbye.](/assets/f_bl_transparent.gif)
