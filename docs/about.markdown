@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Who we are
+title: About
 permalink: /about/
 ---
 I'm Fran, and the unicorn plushie you see all over the place is Peppy. Together, we make **peppynet**.
