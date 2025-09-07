@@ -138,8 +138,9 @@ public struct CHRDATA {
     public ByteArray40 chr_name_extended;
 
     public void test() {
+        // CS1929: best extension method overload 'decode_name' requires receiver of type Span<byte>
         string str_chr_name          = chr_name.decode_name();
-        string str_chr_name_extended = chr_name_extended.decode_name(); 
+        string str_chr_name_extended = chr_name_extended.decode_name();
     }
 }
 {% endraw %}
@@ -172,6 +173,7 @@ Taking the obvious route, we augment the inline array definition with the follow
 [InlineArray(40)]
 public struct ByteArray40 {
     private byte _b;
+    // CS8170: Struct members cannot return 'this' or other instance members by reference.
     public Span<byte> as_span() => this;
 }
 {% endraw %}
