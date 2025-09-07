@@ -103,8 +103,8 @@ and trivially `foreach` over the contents of these arrays. Success!
 But we're not out of the woods quite yet.
 
 ## Operating over inline arrays generically
-The size of an inline array is a compile-time constant. For each
-type T and size S, one needs to define an `[InlineArray(S)]` of `T`.
+The size of an inline array is a compile-time constant. One needs to define 
+a unique struct that is `[InlineArray(S)]` of `T` for each unique size `S` and type `T`.
 
 However, you may very well wish to operate over any inline array of `T`
 generically. How are we to do that? `[InlineArray]` is a special
