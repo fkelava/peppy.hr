@@ -6,7 +6,7 @@ permalink: /about/
 
 I'm Fran, and the unicorn plushie you see all over the place is Peppy. Together, we make **peppynet**.
 
-![Working together.](/assets/work2_bl_transparent.gif)
+![Working together.](/assets/images/work2_bl_transparent.gif)
 
 Our field of work is software development, primarily in .NET/C# and for the automotive sector, and systems administration.
 
@@ -21,4 +21,4 @@ and we're looking forward to many, many more in the years to come.
 Whether you're looking for any of those or simply a solid hand to help you fulfill your business's software needs,
 you can reach us at the e-mail in the page's footer.
 
-![A nice vista to wave you goodbye.](/assets/f_bl_transparent.gif)
+![A nice vista to wave you goodbye.](/assets/images/f_bl_transparent.gif)
