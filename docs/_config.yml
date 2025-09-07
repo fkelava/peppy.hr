@@ -2,7 +2,7 @@ title: peppynet
 author: Fran Kelava
 email: peppy@peppy.hr
 description: >- # this means to ignore newlines until "baseurl:"
-  peppynet is a one-man software development company
+  A one-man software development company
   specializing in .NET applications.
 baseurl: ""
 url: https://peppy.hr
