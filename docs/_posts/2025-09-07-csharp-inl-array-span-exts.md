@@ -187,7 +187,7 @@ The compiler does not permit this. In C#, `this` for `struct` instance methods
 is ["implicitly scoped"](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.unscopedrefattribute?view=net-9.0#remarks) -
 that is, it has a lifetime or 'scope' of `as_span()`, and cannot escape it.
 
-Analogously, in `test()` above the lifetime or 'scope' of `chr_name_span`
+Analogously, in `test()` above the lifetime or 'scope' of `name_span`
 is the method itself. It cannot escape `test()`, but it can be used as a method local.
 
 What we need is a way to pinky-promise to the compiler that we will do just that;
