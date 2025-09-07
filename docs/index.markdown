@@ -4,12 +4,8 @@
 
 layout: base
 ---
+![What keeps us going.](/assets/images/coffee_bl_transparent.gif){:style="display:block; margin-left:auto; margin-right:auto; width=400"}
 
-{:style="text-align:center;"}
-![What keeps us going.](/assets/images/coffee_bl_transparent.gif)
-
-{:style="text-align:center;"}
 **peppynet**
 
-{:style="text-align:center;"}
 [About](/about.markdown)
