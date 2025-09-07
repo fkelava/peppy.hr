@@ -4,7 +4,7 @@
 
 layout: base
 ---
-![What keeps us going.](/assets/images/logo_bl_transparent.png){: height="400" }
+![What keeps us going.](/assets/images/logo_bl_transparent.png){: text-align: center; max-height: 60%; max-width: 90%; }
 
 {: .align-center}
 [About](/about.markdown)
