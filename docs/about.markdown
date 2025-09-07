@@ -8,9 +8,10 @@ I'm Fran, and the unicorn plushie you see all over the place is Peppy. Together,
 
 ![Working together.](/assets/images/work2_bl_transparent.gif)
 
-Our field of work is software development, primarily in .NET/C# and for the automotive sector, and systems administration.
+We develop software, primarily .NET/C# and for the automotive sector. 
+We also have experience with systems administration.
 
-Our _specialty_ is solving unorthodox problems. The path less traveled has brought us a few interesting challenges:
+Our _specialty_ is solving unorthodox problems. The path less traveled brought us many challenges:
 - real-time extraction, post-processing and visualization of sensor data from a race car
 - setting up and administering a hybrid Active Directory setup for a team of 50+ engineers
 - injecting a plugin framework into a foreign process with no source code access 
@@ -19,6 +20,6 @@ Our _specialty_ is solving unorthodox problems. The path less traveled has broug
 and we're looking forward to many, many more in the years to come.
 
 Whether you're looking for any of those or simply a solid hand to help you fulfill your business's software needs,
-you can reach us at the e-mail in the page's footer.
+you can reach us at the e-mail in the page's footer. We'll be waiting eagerly.
 
 ![A nice vista to wave you goodbye.](/assets/images/f_bl_transparent.gif)
