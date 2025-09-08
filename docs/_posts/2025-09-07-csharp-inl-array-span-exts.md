@@ -3,6 +3,47 @@ layout: post
 title:  "C#: Extension methods over inline arrays"
 date:   2025-09-07 20:02:47 +0200
 ---
+## The humble array
+Some exposition is in order.
+
+In C (and many, _many_ other languages) structures
+can freely carry arrays of a given size.
+
+The following declaration:
+
+{% highlight c %}
+{% raw %}
+typedef struct CHRDATA {
+    byte name[20];
+    byte name_extended[40];
+};
+{% endraw %}
+{% endhighlight %}
+
+results, somewhat intuitively, in 60
+`byte`s laid out sequentially.
+
+In .NET, however, arrays are [reference types](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types).
+Their length is not fixed at declaration time, and variables
+of type `byte[]` store a pointer to the data, not the data itself.
+
+If a structure is defined as follows:
+
+{% highlight csharp %}
+{% raw %}
+public struct CHRDATA {
+    byte[] name;
+    byte[] name_extended;
+}
+{% endraw %}
+{% endhighlight %}
+
+the actual layout of the struct is two pointers,
+not two streams of bytes laid out sequentially in memory.
+
+For native interop cases, it is essential that we can 
+model the latter case. How does C# enable us to do this? 
+
 ## Where we came from: Fixed-size buffers
 In .NET native interop cases, one often has a need to model
 fixed-size arrays. Those familiar with the subject matter will know
