@@ -21,7 +21,9 @@ typedef struct CHRDATA {
 {% endhighlight %}
 
 results, somewhat intuitively, in 60
-`byte`s laid out sequentially.
+`byte`s laid out sequentially. For simplicity's sake,
+we will not cover the padding and packing that
+can occur for uneven or unaligned sizes.
 
 In .NET, however, arrays are [reference types](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types).
 Their length is not fixed at declaration time, and variables
@@ -52,11 +54,9 @@ feature.
 One can declare a struct as follows and get expected behavior.
 {% highlight csharp %}
 {% raw %}
-[StructLayout(LayoutKind.Explicit, Pack = 4, Size = 0x2150)]
-public unsafe struct Btl {
-    [FieldOffset(0x198A)] public fixed byte field_name[8];
-    [FieldOffset(0x1FC5)] public fixed byte frontline[3];
-    [FieldOffset(0x1FD3)] public fixed byte backline[4];
+public struct CHRDATA {
+    public fixed byte name[20];
+    public fixed byte name_ext[40];
 }
 {% endraw %}
 {% endhighlight %}
@@ -274,10 +274,10 @@ of inline array types while still allowing us to express
 generic transformations on them regardless of size.
 
 ## Finishing notes
-Another benefit of inline arrays that I did not yet
+A benefit of inline arrays that I did not yet
 address is that they can be generic.
 
-It is valid to declare:
+For a given size `S` and type `T` one can declare:
 {% highlight csharp %}
 {% raw %}
 [InlineArray(S)]
@@ -289,4 +289,4 @@ public struct TArrayS<T> {
 {% endhighlight %}
 
 and an extension `method<T>(this Span<T> span)`. This
-permits generalization over both `T` and `S`.
+permits generalizing over `T` and `S`.
