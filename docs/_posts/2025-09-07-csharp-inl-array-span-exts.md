@@ -54,7 +54,7 @@ feature.
 One can declare a struct as follows and get expected behavior.
 {% highlight csharp %}
 {% raw %}
-public struct CHRDATA {
+public unsafe struct CHRDATA {
     public fixed byte name[20];
     public fixed byte name_ext[40];
 }
@@ -66,17 +66,17 @@ is that they require an `unsafe` context. Another is that they sometimes
 require the use of the `fixed` statement to pin the array while
 indexing it, to prevent the garbage collector from moving it.
 
-Consider the following sample from the .NET examples:
+Consider this slightly modified sample from the .NET examples:
 {% highlight csharp %}
 {% raw %}
-internal unsafe struct Buffer
-{
-    public fixed char fixedBuffer[128];
+public unsafe struct CHRDATA {
+    public fixed byte name[20];
+    public fixed byte name_ext[40];
 }
 
 internal unsafe class Example
 {
-    public Buffer buffer = default;
+    public CHRDATA data = default;
 }
 
 private static void AccessEmbeddedArray()
@@ -86,17 +86,17 @@ private static void AccessEmbeddedArray()
     unsafe
     {
         // Pin the buffer to a fixed location in memory.
-        fixed (char* charPtr = example.buffer.fixedBuffer)
+        fixed (byte* byte_ptr = example.data.name)
         {
-            *charPtr = 'A';
+            *byte_ptr = 0x40;
         }
         // Access safely through the index:
-        char c = example.buffer.fixedBuffer[0];
-        Console.WriteLine(c);
+        byte b = example.data.name[0];
+        Console.WriteLine($"{b}");
 
         // Modify through the index:
-        example.buffer.fixedBuffer[0] = 'B';
-        Console.WriteLine(example.buffer.fixedBuffer[0]);
+        example.data.name[0] = 0x50;
+        Console.WriteLine($"{example.data.name[0]}");
     }
 }
 {% endraw %}
