@@ -4,7 +4,7 @@
 
 layout: home
 ---
-![What keeps us going.](/assets/images/logo_bl_transparent.png){: width="400" }
+![What keeps us going.](/assets/images/logo_bl_transparent.png){: text-align:center; width="400"; }
 
 Welcome to the website of **peppynet**, a one-man company specializing
 in desktop, mobile and even embedded .NET development,
