@@ -15,7 +15,7 @@ The following declaration:
 {% raw %}
 typedef struct CHRDATA {
     byte name[20];
-    byte name_extended[40];
+    byte name_ext[40];
 };
 {% endraw %}
 {% endhighlight %}
@@ -25,7 +25,7 @@ results, somewhat intuitively, in 60
 
 In .NET, however, arrays are [reference types](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types).
 Their length is not fixed at declaration time, and variables
-of type `byte[]` store a pointer to the data, not the data itself.
+of type `byte[]` store only a pointer to the data.
 
 If a structure is defined as follows:
 
@@ -33,7 +33,7 @@ If a structure is defined as follows:
 {% raw %}
 public struct CHRDATA {
     byte[] name;
-    byte[] name_extended;
+    byte[] name_ext;
 }
 {% endraw %}
 {% endhighlight %}
@@ -194,22 +194,25 @@ While they are _implicitly convertible_ to `Span<byte>`, they _aren't_ `Span<byt
 What now? Can we explicitly express or induce that conversion? As it were, yes.
 
 ## Ref-safety for dummies
-If we were in a method, we could obtain the `Span<T>` as follows:
+Within `decode_name()`, we could obtain the `Span<T>` as follows:
 {% highlight csharp %}
 {% raw %}
+public static class Extensions {
+    public static string decode_name(this CHRDATA data) {
+        Span<byte> name_span = name; // Valid assignment.
+        // ...
+    }
+}
+
 public struct CHRDATA {
     public ByteArray20 name;
     public ByteArray40 name_ext;
-
-    public void test() {
-        // Valid assignment.
-        Span<byte> name_span = name;
-    }
 }
 {% endraw %}
 {% endhighlight %}
 
-We have to trigger this conversion _before_ a call to our extension method, however.
+But to enable using `decode_name()` over any inline array of `byte`,
+we have to trigger this conversion _before_ a call to it.
 Taking the obvious route, we augment the inline array definition with the following member:
 {% highlight csharp %}
 {% raw %}
@@ -227,11 +230,11 @@ The compiler does not permit this. In C#, `this` for `struct` instance methods
 is ["implicitly scoped"](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.unscopedrefattribute?view=net-9.0#remarks) -
 that is, it has a lifetime or 'scope' of `as_span()`, and cannot escape it.
 
-Analogously, in `test()` above the lifetime or 'scope' of `name_span`
-is the method itself. It cannot escape `test()`, but it can be used as a method local.
+Analogously, in `decode_name()` above the lifetime or 'scope' of `name_span`
+is the method itself. It cannot escape `decode_name()`, but it can be used as a method local.
 
 What we need is a way to pinky-promise to the compiler that we will do just that;
-only use the obtained `Span<byte>` as a method local in `test()`, which is safe.
+only use the obtained `Span<byte>` as a method local in `decode_name()`, which is safe.
 
 This is done using the [`[UnscopedRef]` attribute](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.unscopedrefattribute?view=net-9.0).
 
