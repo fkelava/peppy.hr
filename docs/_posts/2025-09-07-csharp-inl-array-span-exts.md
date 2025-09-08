@@ -280,12 +280,13 @@ address is that they can be generic.
 It is valid to declare:
 {% highlight csharp %}
 {% raw %}
-[InlineArray(40)]
-public struct TArray40<T> {
+[InlineArray(S)]
+public struct TArrayS<T> {
     private T _b;
     [UnscopedRef] public Span<T> as_span() => this;
 }
 {% endraw %}
 {% endhighlight %}
 
-and an extension `method<T>(this Span<T> span)`.
+and an extension `method<T>(this Span<T> span)`. This
+permits generalization over both `T` and `S`.
