@@ -45,9 +45,9 @@ For native interop cases, it is essential that we can
 model the latter case. How can we do so? 
 
 ## Where we came from: Fixed-size buffers
-Those familiar with the subject matter will know
+Those familiar with the subject matter may think
 of the [fixed size buffers](https://github.com/dotnet/csharpstandard/blob/draft-v8/standard/unsafe-code.md#238-fixed-size-buffers) 
-feature introduced for this exact reason.
+feature.
 
 One can declare a struct as follows and get expected behavior.
 {% highlight csharp %}
