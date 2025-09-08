@@ -106,7 +106,7 @@ But we're not out of the woods quite yet.
 The size of an inline array is a compile-time constant. One needs to define 
 a unique struct that is `[InlineArray(S)]` of `T` for each unique size `S` and type `T`.
 
-However, you may very well wish to operate over any inline array of `T`
+However, one may wish to operate over any inline array of `T`
 generically. How are we to do that? `[InlineArray]` is a special
 attribute, not an interface. We cannot use that as a [generic constraint](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters)
 nor can we define an [extension method](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods) over it.
@@ -226,6 +226,6 @@ public struct CHRDATA {
 {% endraw %}
 {% endhighlight %}
 
-which, in the end, allows us to take all of the benefits
+which, in the end, allows us to take the benefits
 of inline array types while still allowing us to express
-generic transformations on them regardless of their size.
+generic transformations on them regardless of size.
