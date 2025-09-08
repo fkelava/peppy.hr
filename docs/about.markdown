@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 I'm Fran, and the unicorn plushie you see all over the place is Peppy. Together, we make **peppynet**.
-![Working together.](/assets/images/work2_bl_transparent.gif)
+![Working together.](/assets/images/work2_bl_transparent_mini.gif)
 We develop software, primarily .NET/C# and for the automotive sector. 
 We also have experience with Windows/Active Directory systems administration.
 
