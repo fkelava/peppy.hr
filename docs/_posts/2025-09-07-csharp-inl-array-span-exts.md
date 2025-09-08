@@ -64,7 +64,7 @@ private static void AccessEmbeddedArray()
 
 This adds up to a fairly verbose way to model and consume such structures.
 
-## Where we're headed; inline arrays
+## Where we're headed: inline arrays
 As an improvement to this, .NET 8 and C# 12 introduced the
 [`[InlineArray]` attribute](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-12.0/inline-arrays),
 which offers a number of compelling benefits:
