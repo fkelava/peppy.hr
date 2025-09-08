@@ -212,8 +212,8 @@ public struct CHRDATA {
 {% endhighlight %}
 
 But to enable using `decode_name()` over any inline array of `byte`,
-we have to trigger this conversion _before_ a call to it.
-Taking the obvious route, we augment the inline array definition with the following member:
+we have to trigger this conversion _before_ the call.
+Taking the obvious route, we augment the inline array definition as follows:
 {% highlight csharp %}
 {% raw %}
 [InlineArray(40)]
@@ -272,3 +272,20 @@ public struct CHRDATA {
 which, in the end, allows us to take the benefits
 of inline array types while still allowing us to express
 generic transformations on them regardless of size.
+
+## Finishing notes
+Another benefit of inline arrays that I did not yet
+address is that they can be generic.
+
+It is valid to declare:
+{% highlight csharp %}
+{% raw %}
+[InlineArray(40)]
+public struct TArray40<T> {
+    private T _b;
+    [UnscopedRef] public Span<T> as_span() => this;
+}
+{% endraw %}
+{% endhighlight %}
+
+and an extension `method<T>(this Span<T> span)`.
