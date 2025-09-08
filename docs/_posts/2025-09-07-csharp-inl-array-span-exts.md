@@ -42,11 +42,10 @@ the actual layout of the struct is two pointers,
 not two streams of bytes laid out sequentially in memory.
 
 For native interop cases, it is essential that we can 
-model the latter case. How does C# enable us to do this? 
+model the latter case. How can we do so? 
 
 ## Where we came from: Fixed-size buffers
-In .NET native interop cases, one often has a need to model
-fixed-size arrays. Those familiar with the subject matter will know
+Those familiar with the subject matter will know
 of the [fixed size buffers](https://github.com/dotnet/csharpstandard/blob/draft-v8/standard/unsafe-code.md#238-fixed-size-buffers) 
 feature introduced for this exact reason.
 
