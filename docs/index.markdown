@@ -8,5 +8,5 @@ Welcome to the website of **peppynet**, a one-man company specializing
 in desktop, mobile and even embedded .NET development,
 with a special focus on automotive applications.
 
-Grab a copy of the [resume](/assets/CV_FranKelava_2025.pdf), read more
+Grab a copy of the [resume](/assets/CV_Fran_Kelava.pdf), read more
 [about us](/about.markdown), or browse posts from our blog below.
